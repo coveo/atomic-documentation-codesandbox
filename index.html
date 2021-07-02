@@ -10,23 +10,22 @@
 
     <script
       type="module"
-      src="https://unpkg.com/@coveo/atomic@0.7.0-alpha.33/dist/atomic/atomic.esm.js"
+      src="https://static.cloud.coveo.com/atomic/v0.13.1/atomic.esm.js"
     ></script>
     <link
       rel="stylesheet"
-      href="https://unpkg.com/@coveo/atomic@0.7.0-alpha.33/dist/atomic/themes/default.css"
+      href="https://static.cloud.coveo.com/atomic/latest/themes/default.css"
     />
+    <link rel="stylesheet" href="https://use.typekit.net/bqa0xml.css" />
     <script>
       (async () => {
         await customElements.whenDefined("atomic-search-interface");
-        const searchInterface = document.querySelector(
-          "atomic-search-interface"
-        );
+        const searchInterface = document.querySelector("#search");
 
         // Initialization
         await searchInterface.initialize({
           accessToken: "xx564559b1-0045-48e1-953c-3addd1ee4457",
-          organizationId: "searchuisamples"
+          organizationId: "searchuisamples",
         });
 
         // Trigger a first search
@@ -43,42 +42,64 @@
       })();
     </script>
     <style>
-      /* Example of CSS variables customiætion */
-      :root {
-        --atomic-primary: blue;
-        --atomic-secondary: blue;
-        --atomic-separator: " - ";
-      }
+      /* Example on how to customize CSS variables */
+      /* :root {
+        --atomic-primary: red;
+        --atomic-font-family: "Comic Sans MS", "Comic Sans", cursive;
+        --atomic-secondary: green;
+      } */
 
-      /* Example of result templates CSS parts customization */
+      /* Example on how to customize result templates CSS parts */
       /* atomic-result::part(result-link):hover {
         color: orange;
       } */
     </style>
     <style>
       /* Example of generic layout styling  */
-      .interface-container {
-        width: 100%;
-        max-width: 1250px;
-        margin: 0 auto;
+      body {
+        margin: 0;
+      }
+
+      atomic-search-interface {
+        grid-template-columns: 1fr minmax(150px, 300px) minmax(500px, 950px) 1fr;
+        grid-template-rows: 22px 50px 22px 1fr;
+        column-gap: 20px;
         display: grid;
-        grid-template-columns: 25% 1fr;
-        gap: 20px;
+        margin: 0 auto;
       }
 
-      .search-box-item {
-        grid-column-start: 2;
+      .header {
+        background-color: var(--atomic-background-variant);
+        grid-column: 1 / span 4;
+        grid-row: 1 / span 3;
       }
 
-      .footer-item {
-        grid-column-start: 2;
-        grid-row-start: 3;
+      atomic-search-box {
+        grid-column: 3 / auto;
+        grid-row: 2 / auto;
+        max-width: 650px;
+      }
+
+      atomic-facet-manager {
+        grid-column: 2 / auto;
+        grid-row: 4 / auto;
+        margin-top: 15px;
+      }
+
+      .results-container {
+        grid-column: 3 / auto;
+        grid-row: 4 / auto;
+        margin-top: 15px;
       }
 
       .side-by-side-container {
         display: flex;
         justify-content: space-between;
-        align-items: flex-end;
+        align-items: center;
+      }
+
+      .footer-item {
+        margin: 30px 0;
       }
 
       atomic-facet-manager {
@@ -90,91 +111,260 @@
         margin-top: 10px;
       }
 
-      atomic-result::part(result-printable-uri-list-element) {
-        text-transform: capitalize;
+      atomic-breadcrumb-manager {
+        margin: 10px 0;
+      }
+
+      @media only screen and (max-width: 1024px) {
+        atomic-search-interface {
+          grid-template-rows: 16px 50px 16px auto 1fr;
+          grid-template-columns: minmax(0, 100%);
+        }
+
+        atomic-facet-manager,
+        .header,
+        atomic-search-box,
+        .results-container {
+          grid-column: 1 / auto;
+        }
+
+        atomic-breadcrumb-manager,
+        atomic-query-summary,
+        atomic-no-results,
+        atomic-did-you-mean,
+        atomic-query-error,
+        atomic-sort-dropdown,
+        atomic-facet-manager {
+          padding: 0 15px;
+        }
+
+        atomic-atomic-breadcrumb-manager,
+        atomic-query-summary,
+        atomic-no-results,
+        atomic-query-error,
+        atomic-sort-dropdown {
+          margin-bottom: 10px;
+        }
+        atomic-sort-dropdown::part(label) {
+          font-style: italic;
+        }
+
+        atomic-facet-manager {
+          grid-row: 4 / auto;
+          display: flex;
+          flex-wrap: wrap;
+        }
+
+        .results-container {
+          grid-row: 5 / auto;
+          margin-top: 0;
+        }
+
+        atomic-facet,
+        atomic-numeric-facet,
+        atomic-date-facet,
+        atomic-category-facet {
+          margin: 0 10px 0 0;
+        }
+
+        atomic-search-box {
+          justify-self: center;
+          min-width: 80%;
+          max-width: 80%;
+        }
+        atomic-search-box::part(submit-button) {
+          background-color: red;
+        }
+      }
+
+      @media only screen and (max-width: 640px) {
+        .side-by-side-container {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      atomic-results-per-page::part(active-page-button) {
+        background-color: orange;
+        color: blue;
+      }
+
+      :root {
+        --atomic-font-family: "canada-type-gibson";
+        --atomic-font-bold: 600;
       }
     </style>
   </head>
+
   <body>
-    <atomic-search-interface id="search">
-      <div class="interface-container">
-        <atomic-search-box class="search-box-item"></atomic-search-box>
-
-        <atomic-facet-manager>
-          <atomic-facet field="author" label="Authors"></atomic-facet>
-          <atomic-numeric-facet field="size" label="File sizes">
-            <atomic-numeric-range
-              start="0"
-              end="10"
-              end-inclusive="true"
-            ></atomic-numeric-range>
-          </atomic-numeric-facet>
-          <atomic-date-facet
-            field="created"
-            label="Created"
-          ></atomic-date-facet>
-          <atomic-category-facet
-            field="geographicalhierarchy"
-            label="World Atlas"
-          ></atomic-category-facet>
-        </atomic-facet-manager>
-
-        <div class="results-container">
-          <atomic-breadcrumb-manager></atomic-breadcrumb-manager>
-          <atomic-did-you-mean></atomic-did-you-mean>
-          <atomic-query-error></atomic-query-error>
-          <div class="side-by-side-container">
-            <atomic-query-summary></atomic-query-summary>
-            <atomic-sort-dropdown>
-              <atomic-sort-criteria
-                caption="relevance"
-                criteria="relevancy"
-              ></atomic-sort-criteria>
-              <atomic-sort-criteria
-                caption="mostRecent"
-                criteria="date descending"
-              ></atomic-sort-criteria>
-            </atomic-sort-dropdown>
-          </div>
-
-          <atomic-no-results></atomic-no-results>
-
-          <atomic-result-list
-            fields-to-include="filetype,liboardinteractionstyle"
-          >
-            <!-- Custom result template examples -->
-            <atomic-result-template
-              must-match-filetype="lithiummessage"
-              must-not-match-liboardinteractionstyle="contest"
-            >
-              <template>
-                <!-- Styling result template internaly -->
-                <style>
-                  h3 {
-                    font-weight: bold;
-                    color: var(--atomic-secondary);
-                  }
-                </style>
-                <h3>Contest message</h3>
-                <atomic-result-link></atomic-result-link>
-              </template>
-            </atomic-result-template>
-            <atomic-result-template id="singaporeTitle">
-              <template>
-                🇸🇬 <atomic-result-link></atomic-result-link>
-              </template>
-              <!-- Adding Javascript conditions -->
-              <script>
-                document.querySelector(
-                  "atomic-result-template#singaporeTitle"
-                ).conditions = [(result) => /singapore/i.test(result.title)];
-              </script>
-            </atomic-result-template>
-          </atomic-result-list>
+    <atomic-search-interface id="search" language="en">
+      <div class="header"></div>
+      <atomic-search-box number-of-suggestions="6"></atomic-search-box>
+      <atomic-facet-manager>
+        <atomic-facet field="author" label="Authors"></atomic-facet>
+        <atomic-numeric-facet field="size" label="File sizes">
+          <atomic-numeric-range start="0" end="10"></atomic-numeric-range>
+          <atomic-numeric-range start="10" end="20"></atomic-numeric-range>
+          <atomic-numeric-range start="20" end="30"></atomic-numeric-range>
+          <atomic-numeric-range start="30" end="40"></atomic-numeric-range>
+          <atomic-numeric-range start="40" end="50"></atomic-numeric-range>
+        </atomic-numeric-facet>
+        <atomic-date-facet field="date" label="Date"></atomic-date-facet>
+        <atomic-category-facet
+          field="geographicalhierarchy"
+          label="World Atlas"
+          enable-facet-search
+        >
+        </atomic-category-facet>
+      </atomic-facet-manager>
+      <div class="results-container">
+        <atomic-breadcrumb-manager></atomic-breadcrumb-manager>
+        <atomic-did-you-mean></atomic-did-you-mean>
+        <atomic-query-error></atomic-query-error>
+        <div class="side-by-side-container">
+          <atomic-query-summary></atomic-query-summary>
+          <atomic-sort-dropdown>
+            <atomic-sort-expression
+              caption="relevance"
+              expression="relevancy"
+            ></atomic-sort-expression>
+            <atomic-sort-expression
+              caption="mostRecent"
+              expression="date descending"
+            ></atomic-sort-expression>
+          </atomic-sort-dropdown>
         </div>
+        <atomic-no-results></atomic-no-results>
+        <atomic-result-list
+          fields-to-include="author, source, language, filetype, ytthumbnailurl"
+        >
+          <atomic-result-template must-match-filetype="YouTubeVideo">
+            <template>
+              <style>
+                :host {
+                  border-top: 1px solid var(--atomic-divider);
+                  display: block;
+                  padding: 15px;
+                }
+
+                .template-container {
+                  display: flex;
+                }
+
+                .title-container {
+                  display: flex;
+                  justify-content: space-between;
+                }
+
+                .content-container {
+                  width: 100%;
+                  display: grid;
+                  grid-template-columns: minmax(0, 1fr);
+                  margin-left: 15px;
+                  gap: 15px;
+                }
+
+                .fields-container {
+                  display: flex;
+                  flex-wrap: wrap;
+                }
+
+                .fields-container > atomic-field-condition {
+                  margin: 0 15px 10px 0;
+                  background: var(--atomic-background-variant);
+                  padding: 4px 8px;
+                  font-size: 0.8rem;
+                  border-radius: 32px;
+                  color: var(--atomic-on-background-variant);
+                  white-space: nowrap;
+                }
+
+                .fields-container > atomic-field-condition > atomic-text {
+                  border-right: 1px solid #e5e8e8;
+                  padding: 0 8px;
+                }
+
+                .fields-container
+                  > atomic-field-condition
+                  > atomic-result-text {
+                  margin: 0 8px;
+                }
+
+                a[part="result-link"] {
+                  font-size: 1.25rem;
+                }
+
+                atomic-result-text[field="excerpt"] {
+                  line-height: 1.5rem;
+                }
+
+                a[part="result-printable-uri-link"] {
+                  font-size: 0.8rem;
+                  color: red;
+                }
+
+                .template-container b {
+                  font-weight: var(--atomic-font-bold);
+                }
+
+                atomic-result-printable-uri {
+                  line-height: 1.25rem;
+                }
+
+                img[part="result-image"] {
+                  width: 110%;
+                }
+              </style>
+              <div class="template-container">
+                <div>
+                  <atomic-result-image
+                    field="ytthumbnailurl"
+                  ></atomic-result-image>
+                  <atomic-result-quickview></atomic-result-quickview>
+                </div>
+
+                <div class="content-container">
+                  <div class="title-container">
+                    <atomic-result-link></atomic-result-link>
+                    <atomic-result-date></atomic-result-date>
+                  </div>
+
+                  <atomic-result-text field="excerpt"></atomic-result-text>
+
+                  <div class="fields-container">
+                    <atomic-field-condition if-defined="author">
+                      <atomic-text value="author"></atomic-text>
+                      <atomic-result-text field="author"></atomic-result-text>
+                    </atomic-field-condition>
+
+                    <atomic-field-condition if-defined="source">
+                      <atomic-text value="source"></atomic-text>
+                      <atomic-result-text field="source"></atomic-result-text>
+                    </atomic-field-condition>
+
+                    <atomic-field-condition if-defined="language">
+                      <atomic-text value="language"></atomic-text>
+                      <atomic-result-text field="language"></atomic-result-text>
+                    </atomic-field-condition>
+
+                    <atomic-field-condition if-defined="filetype">
+                      <atomic-text value="fileType"></atomic-text>
+                      <atomic-result-text field="filetype"></atomic-result-text>
+                    </atomic-field-condition>
+                  </div>
+
+                  <atomic-result-printable-uri></atomic-result-printable-uri>
+                </div>
+              </div>
+            </template>
+          </atomic-result-template>
+        </atomic-result-list>
         <div class="footer-item side-by-side-container">
           <atomic-pager></atomic-pager>
-          <atomic-results-per-page></atomic-results-per-page>
+          <atomic-results-per-page
+            choices-displayed="5,10,20,50"
+            initial-choice="20"
+          ></atomic-results-per-page>
         </div>
       </div>
     </atomic-search-interface>
