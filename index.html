@@ -1,29 +1,22 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
-    />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
     <title>Coveo Atomic</title>
 
-    <script
-      type="module"
-      src="https://static.cloud.coveo.com/atomic/latest/atomic.esm.js"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="https://static.cloud.coveo.com/atomic/latest/themes/default.css"
-    />
+    <script type="module" src="https://static.cloud.coveo.com/atomic/latest/atomic.esm.js"></script>
+    
+    <link rel="stylesheet" href="https://static.cloud.coveo.com/atomic/latest/themes/default.css">
     <script>
       (async () => {
-        await customElements.whenDefined("atomic-search-interface");
-        const searchInterface = document.querySelector("#search");
+        await customElements.whenDefined('atomic-search-interface');
+        const searchInterface = document.querySelector('#search');
 
         await searchInterface.initialize({
-          accessToken: "xx564559b1-0045-48e1-953c-3addd1ee4457",
-          organizationId: "searchuisamples",
+          accessToken: 'xx564559b1-0045-48e1-953c-3addd1ee4457',
+          organizationId: 'searchuisamples',
         });
 
         searchInterface.executeFirstSearch();
@@ -168,11 +161,7 @@
           <atomic-numeric-range start="40" end="50"></atomic-numeric-range>
         </atomic-numeric-facet>
         <atomic-date-facet field="date" label="Date"></atomic-date-facet>
-        <atomic-category-facet
-          field="geographicalhierarchy"
-          label="World Atlas"
-          enable-facet-search
-        >
+        <atomic-category-facet field="geographicalhierarchy" label="World Atlas" enable-facet-search>
         </atomic-category-facet>
       </atomic-facet-manager>
       <div class="results-container">
@@ -182,14 +171,8 @@
         <div class="side-by-side-container">
           <atomic-query-summary></atomic-query-summary>
           <atomic-sort-dropdown>
-            <atomic-sort-expression
-              caption="relevance"
-              expression="relevancy"
-            ></atomic-sort-expression>
-            <atomic-sort-expression
-              caption="mostRecent"
-              expression="date descending"
-            ></atomic-sort-expression>
+            <atomic-sort-expression caption="relevance" expression="relevancy"></atomic-sort-expression>
+            <atomic-sort-expression caption="most-recent" expression="date descending"></atomic-sort-expression>
           </atomic-sort-dropdown>
         </div>
         <atomic-no-results></atomic-no-results>
