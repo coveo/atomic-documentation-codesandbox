@@ -1,0 +1,50 @@
+name: Create New CodeSandBoxDemo
+on:
+  repository_dispatch:
+    types: [atomic_docs_generated]
+jobs:
+  create-new-version-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Make a new Branch
+        uses: peterjgrainger/action-create-branch@b48b0ca0e307c9b56f059b70274984ffeaa90a43
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: "${{ github.event.client_payload.atomic_version }}"
+      - name: Setup Ruby in runner
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+      - name: Run script to update package.json and CDN in index.html on new branch
+        run: |
+          gem install nokogiri
+          rm index.html
+          curl https://raw.githubusercontent.com/coveo/ui-kit/master/packages/atomic/src/pages/index.html --output index.html
+          cd .github/scripts
+          ruby update_package.rb ${{ github.event.client_payload.atomic_version }}
+  update-latest-version-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Ruby in runner
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+      - name: Run script to update package.json and CDN in index.html on master branch
+        run: |
+          gem install nokogiri
+          rm index.html
+          curl https://raw.githubusercontent.com/coveo/ui-kit/master/packages/atomic/src/pages/index.html --output index.html
+          cd .github/scripts
+          ruby update_package.rb latest
+      - name: Create PR for new branch
+        uses: gr2m/create-or-update-pull-request-action@cbfed2a38aedceab8d9fc0d9ac14890fc181d39e
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          title: "Update Latest Atomic CSB Demo"
+          branch: "latest"
+          commit-message: "Update latest version"
+          assignees: dlutzCoveo, jpmarceau
