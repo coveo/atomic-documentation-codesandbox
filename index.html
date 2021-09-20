@@ -1,23 +1,14 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
   <head>
-
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
-    />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
     <title>Coveo Atomic</title>
 
-    <script
-      type="module"
-      src="https://static.cloud.coveo.com/atomic/latest/atomic.esm.js"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="https://static.cloud.coveo.com/atomic/latest/themes/coveo.css"
-    />
+    <script type="module" src="https://static.cloud.coveo.com/atomic/latest/atomic.esm.js"></script>
+    
+    <link rel="stylesheet" href="https://static.cloud.coveo.com/atomic/latest/themes/default.css">
     <script>
       (async () => {
         await customElements.whenDefined('atomic-search-interface');
@@ -265,19 +256,9 @@
           <atomic-timeframe unit="year"></atomic-timeframe>
         </atomic-timeframe-facet>
         <atomic-rating-facet field="snrating" label="Rating" number-of-intervals="5"> </atomic-rating-facet>
-        <atomic-rating-range-facet
-          facet-id="snrating_range"
-          field="snrating"
-          label="Rating Range"
-          number-of-intervals="5"
-        >
+        <atomic-rating-range-facet facet-id="snrating_range" field="snrating" label="Rating Range" number-of-intervals="5">
         </atomic-rating-range-facet>
-        <atomic-color-facet
-          field="filetype"
-          label="Files"
-          number-of-values="6"
-          sort-criteria="occurrences"
-        ></atomic-color-facet>
+        <atomic-color-facet field="filetype" label="Files" number-of-values="6" sort-criteria="occurrences"></atomic-color-facet>
       </atomic-facet-manager>
       <atomic-breadbox></atomic-breadbox>
       <div class="topbar">
@@ -340,16 +321,13 @@
               </style>
               <atomic-result-section-visual>
                 <atomic-result-icon class="icon"></atomic-result-icon>
-                <img src="https://picsum.photos/350" class="thumbnail" />
+                <img src="https://picsum.photos/350" class="thumbnail">
               </atomic-result-section-visual>
               <atomic-result-section-badges>
                 <atomic-field-condition must-match-sourcetype="Salesforce">
                   <atomic-result-badge label="Salesforce" class="salesforce-badge"></atomic-result-badge>
                 </atomic-field-condition>
-                <atomic-result-badge
-                  field="language"
-                  icon="https://raw.githubusercontent.com/Rush/Font-Awesome-SVG-PNG/master/black/svg/language.svg"
-                ></atomic-result-badge>
+                <atomic-result-badge field="language" icon="https://raw.githubusercontent.com/Rush/Font-Awesome-SVG-PNG/master/black/svg/language.svg"></atomic-result-badge>
               </atomic-result-section-badges>
               <atomic-result-section-title><atomic-result-link></atomic-result-link></atomic-result-section-title>
               <atomic-result-section-title-metadata>
@@ -360,9 +338,7 @@
                   <atomic-result-printable-uri max-number-of-parts="3"></atomic-result-printable-uri>
                 </atomic-field-condition>
               </atomic-result-section-title-metadata>
-              <atomic-result-section-excerpt
-                ><atomic-result-text field="excerpt"></atomic-result-text
-              ></atomic-result-section-excerpt>
+              <atomic-result-section-excerpt><atomic-result-text field="excerpt"></atomic-result-text></atomic-result-section-excerpt>
               <atomic-result-section-bottom-metadata>
                 <atomic-result-fields-list>
                   <atomic-field-condition class="field" if-defined="author">
