@@ -17,10 +17,6 @@ jobs:
           git checkout -b "${{ github.event.client_payload.atomic_version }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Checkout new branch
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.client_payload.atomic_version }}
       - name: Run script to update package.json and CDN in index.html on new branch
         run: |
           gem install nokogiri
