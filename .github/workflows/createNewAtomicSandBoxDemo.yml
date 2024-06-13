@@ -28,4 +28,4 @@ jobs:
           git status
           git add index.html
           git commit -m "updated version"
-          git push
+          git push --set-upstream origin ${{ github.event.client_payload.atomic_version }}
