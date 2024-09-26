@@ -10,6 +10,8 @@ jobs:
         uses: ruby/setup-ruby@ee26e27437bde475b19a6bf8cb73c9fa658876a2
         with:
           ruby-version: '3.1.2'
+        env:
+          ImageOS: ubuntu22
       - uses: actions/checkout@v4
       - run: 'echo "payload: ${{ toJson(github.event.client_payload) }}"'
       - name: Make a new Branch
