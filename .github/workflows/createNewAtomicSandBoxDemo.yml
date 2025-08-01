@@ -19,11 +19,18 @@ jobs:
           ImageOS: ubuntu22
       - uses: actions/checkout@v4
       - run: 'echo "payload: ${{ toJson(github.event.client_payload) }}"'
+
+      - name: Pull latest changes
+        run: git pull
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Make a new Branch
         run: |
           git checkout -b "${{ github.event.client_payload.atomic_version }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Run script to update package.json and CDN in index.html on new branch
         run: |
           gem install nokogiri
