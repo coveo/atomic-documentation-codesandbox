@@ -1,7 +1,7 @@
 {
     "name": "coveo-atomic-example",
     "version": "1.0.0",
-    "description": "",
+    "description": "Coveo Atomic example",
     "main": "index.html",
     "scripts": {
       "start": "serve",
@@ -9,15 +9,15 @@
     },
     "repository": {
       "type": "git",
-      "url": "git+https://github.com/codesandbox-app/static-template.git"
+      "url": "git+https://github.com/coveo/atomic-documentation-codesandbox.git"
     },
     "keywords": [],
-    "author": "Ives van Hoorne",
+    "author": "Jean-Philippe Marceau",
     "license": "MIT",
     "bugs": {
-      "url": "https://github.com/codesandbox-app/static-template/issues"
+      "url": "https://github.com/coveo/atomic-documentation-codesandbox/issues"
     },
-    "homepage": "https://github.com/codesandbox-app/static-template#readme",
+    "homepage": "https://github.com/coveo/atomic-documentation-codesandbox",
     "devDependencies": {
       "serve": "^11.2.0"
     }
