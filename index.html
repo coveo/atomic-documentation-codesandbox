@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
     <title>Coveo Atomic</title>
 
-    <script type="module" src="https://static.cloud.coveo.com/atomic/v3/atomic.esm.js"></script>
-    <link rel="stylesheet" href="https://static.cloud.coveo.com/atomic/v3/themes/coveo.css">
+    <script type="module" src="https://static.cloud.coveo.com/atomic/v3.33/atomic.esm.js"></script>
+    <link rel="stylesheet" href="https://static.cloud.coveo.com/atomic/v2/themes/coveo.css">
     <script>
       (async () => {
         await customElements.whenDefined("atomic-search-interface");
@@ -229,9 +229,7 @@
                       <atomic-result-badge label="Salesforce" class="salesforce-badge"></atomic-result-badge>
                     </atomic-field-condition>
                     <atomic-field-condition class="field" if-defined="language">
-                      <atomic-result-badge
-                        icon="https://raw.githubusercontent.com/Rush/Font-Awesome-SVG-PNG/master/black/svg/language.svg"
-                      >
+                      <atomic-result-badge icon="https://raw.githubusercontent.com/Rush/Font-Awesome-SVG-PNG/master/black/svg/language.svg">
                         <atomic-result-multi-value-text field="language"></atomic-result-multi-value-text>
                       </atomic-result-badge>
                     </atomic-field-condition>
