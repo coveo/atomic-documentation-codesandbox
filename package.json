@@ -19,6 +19,6 @@
     },
     "homepage": "https://github.com/coveo/atomic-documentation-codesandbox",
     "devDependencies": {
-      "serve": "^11.2.0"
+      "serve": "^14.0.0"
     }
   }
