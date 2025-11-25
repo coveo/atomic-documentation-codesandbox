@@ -17,7 +17,7 @@ jobs:
           ruby-version: '3.1.2'
         env:
           ImageOS: ubuntu22
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - run: 'echo "payload: ${{ toJson(github.event.client_payload) }}"'
 
       - name: Pull latest changes
