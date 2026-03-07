@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: atomic-documentation-codesandbox
+
+  annotations:
+    github.com/project-slug: coveo/atomic-documentation-codesandbox
+
+spec:
+  type: website
+  lifecycle: experimental
+  owner: dev-docs
