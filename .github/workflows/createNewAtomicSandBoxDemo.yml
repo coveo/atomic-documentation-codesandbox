@@ -2,6 +2,8 @@ name: Create New CodeSandBoxDemo
 on:
   repository_dispatch:
     types: [atomic_docs_generated]
+permissions:
+  contents: write
 jobs:
   create-new-version-demo:
     runs-on: ubuntu-latest
